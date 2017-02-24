@@ -7,6 +7,14 @@
 <%@ page import="com.plucial.mulcms.sales.model.*" %>
 <%@ page import="com.plucial.mulcms.sales.enums.*" %>
 <%@ page import="org.slim3.util.StringUtil" %>
+<%@ page import="java.text.NumberFormat" %>
+<%
+NumberFormat nfNum = NumberFormat.getNumberInstance();  
+
+Statistics clientTotalNumber = (Statistics)request.getAttribute("clientTotalNumber");
+Statistics partnerTotalNumber = (Statistics)request.getAttribute("partnerTotalNumber");
+Statistics projectTotalNumber = (Statistics)request.getAttribute("projectTotalNumber");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +44,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>40,000<sup style="font-size: 20px">社</sup></h3>
+                  <h3><%=nfNum.format(clientTotalNumber.getStatistic()) %><sup style="font-size: 20px">社</sup></h3>
                   <p>クライアント</p>
                 </div>
                 <div class="icon">
@@ -49,7 +57,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>7,000<sup style="font-size: 20px">社</sup></h3>
+                  <h3><%=nfNum.format(partnerTotalNumber.getStatistic()) %><sup style="font-size: 20px">社</sup></h3>
                   <p>パートナー</p>
                 </div>
                 <div class="icon">
@@ -78,7 +86,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">件</sup></h3>
+                  <h3><%=nfNum.format(projectTotalNumber.getStatistic()) %><sup style="font-size: 20px">件</sup></h3>
                   <p>プロジェクト</p>
                 </div>
                 <div class="icon">

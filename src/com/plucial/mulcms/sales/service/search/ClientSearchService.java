@@ -36,10 +36,10 @@ public class ClientSearchService extends SearchService{
                     .setAtom(String.valueOf(company.getIndustry().toString())))
                 .addField(Field.newBuilder()
                     .setName("name")
-                    .setAtom(company.getName()))
+                    .setText(company.getName()))
                 .addField(Field.newBuilder()
                     .setName("address")
-                    .setAtom(StringUtils.isEmpty(company.getAddress()) ? "" : company.getAddress()))
+                    .setText(StringUtils.isEmpty(company.getAddress()) ? "" : company.getAddress()))
                 .addField(Field.newBuilder()
                     .setName("email")
                     .setAtom(company.getEmail() == null ? "" : company.getEmail().getEmail()))
@@ -48,7 +48,7 @@ public class ClientSearchService extends SearchService{
                     .setAtom(company.getPhoneNumber() == null ? "" : company.getPhoneNumber().getNumber()))
                 .addField(Field.newBuilder()
                     .setName("responsiblePartyName")
-                    .setAtom(StringUtils.isEmpty(company.getResponsiblePartyName()) ? "" : company.getResponsiblePartyName()))
+                    .setText(StringUtils.isEmpty(company.getResponsiblePartyName()) ? "" : company.getResponsiblePartyName()))
             .build();
 
             Index index = getDocumentIndex(ITEM_DOCUMENT_INDEX);

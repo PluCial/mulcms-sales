@@ -235,7 +235,7 @@ public class ProjectService {
      * @param cursor
      * @return
      */
-    public S3QueryResultList<Project> getList(Client client, int limit, String cursor) {
+    public static S3QueryResultList<Project> getList(Client client, int limit, String cursor) {
         return dao.getList(client, limit, cursor);
     }
 

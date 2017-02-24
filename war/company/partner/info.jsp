@@ -7,12 +7,14 @@
 <%@ page import="com.plucial.mulcms.sales.model.*" %>
 <%@ page import="com.plucial.mulcms.sales.enums.*" %>
 <%@ page import="org.slim3.util.StringUtil" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
 Errors errors =(Errors) request.getAttribute("errors");
 
 Partner company = (Partner)request.getAttribute("company");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
 
-List<Partner> companyList = (List<Partner>)request.getAttribute("companyList");
+List<Project> projectList = (List<Project>)request.getAttribute("projectList");
 String nowCursor = (String) request.getAttribute("cursor");
 String nextCursor = null;
 boolean hasNext = false;
@@ -89,44 +91,9 @@ if (request.getAttribute("nextCursor") != null && request.getAttribute("hasNext"
             <!-- partner left content -->
             
             <div class="col-md-9">
-              <div class="box box-primary" style="z-index: 1;">
-                <div class="box-header with-border">
-                  <h3 class="box-title">案件一覧 (<%=company.getNumberOfProjects() %> 件)</h3>
-                  <!-- <div class="box-tools pull-right">
-                    <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="Search Keyword"/>
-                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </div>/.box-tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="table-responsive mailbox-messages" style="overflow-x: visible !important;overflow-y: visible !important;">
-                    <table class="table table-hover table-striped">
-                      <tbody>
-                      	
-                      </tbody>
-                    </table><!-- /.table -->
-                  </div><!-- /.mail-box-messages -->
-                </div><!-- /.box-body -->
-                
-                
-                <div class="box-footer">
-                  <div class="mailbox-controls">
-                    <%if(!StringUtil.isEmpty(nowCursor)) { %>
-                    <a class="btn btn-default btn-sm pull-left" href="javascript:history.back();">
-                    	<i class="fa fa-chevron-left"></i>
-                    </a>
-                    <%} %>
-                  	<%if(hasNext) { %>
-                    <a class="btn btn-default btn-sm pull-right" href="/company/?cursor=<%=nextCursor %>">
-                    	<i class="fa fa-chevron-right"></i>
-                    </a>
-                    <%} %>
-                  </div>
-                </div>
-                
-                
-              </div><!-- /. box -->
+                <!-- project_list -->
+				<jsp:include page="/includes/project_list.jsp" />
+			    <!-- /project_list -->
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->

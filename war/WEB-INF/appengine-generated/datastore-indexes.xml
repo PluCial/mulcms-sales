@@ -1,8 +1,8 @@
-<!-- Indices written at Fri, 24 Feb 2017 15:34:04 JST -->
+<!-- Indices written at Fri, 24 Feb 2017 12:51:43 JST -->
 
 <datastore-indexes>
 
-    <!-- Used 7 times in query history -->
+    <!-- Used 6 times in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
         <property name="contactStatus" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
@@ -14,8 +14,18 @@
         <property name="clientRef" direction="asc"/>
         <property name="createDate" direction="desc"/>
     </datastore-index>
+    
+    <datastore-index kind="Project" ancestor="false" source="manual">
+        <property name="partnerRef" direction="asc"/>
+        <property name="createDate" direction="desc"/>
+    </datastore-index>
+    
+    <datastore-index kind="Project" ancestor="false" source="manual">
+        <property name="status" direction="asc"/>
+        <property name="createDate" direction="desc"/>
+    </datastore-index>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
         <property name="partner" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>

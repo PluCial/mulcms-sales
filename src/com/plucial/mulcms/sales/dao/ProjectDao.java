@@ -88,7 +88,7 @@ public class ProjectDao extends DaoBase<Project>{
      */
     private S3QueryResultList<Project> getList(Client client, int limit) {
         return Datastore.query(meta)
-                .filter(meta.partnerRef.equal(client.getKey()))
+                .filter(meta.clientRef.equal(client.getKey()))
                 .sort(meta.createDate.desc)
                 .limit(limit)
                 .asQueryResultList();
@@ -105,7 +105,7 @@ public class ProjectDao extends DaoBase<Project>{
         if (StringUtil.isEmpty(cursor)) return getList(client, limit);
         
         return Datastore.query(meta)
-                .filter(meta.partnerRef.equal(client.getKey()))
+                .filter(meta.clientRef.equal(client.getKey()))
                 .sort(meta.createDate.desc)
                 .limit(limit)
                 .encodedStartCursor(cursor)

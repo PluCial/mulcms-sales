@@ -60,7 +60,7 @@ public class StatisticsService {
      * @throws ObjectNotExistException 
      */
     public static Statistics getClientStatus(ContactStatus status) {
-        Key key = createKey("client_" + status.toString());
+        Key key = createKey("client_contact_" + status.toString());
         Statistics model = dao.getOrNull(key);
         if(model == null) {
             model = new Statistics();
@@ -78,7 +78,7 @@ public class StatisticsService {
      */
     public static Statistics getPartnerStatus(ContactStatus status) {
         
-        Key key = createKey("partner_" + status.toString());
+        Key key = createKey("partner_contact_" + status.toString());
         Statistics model = dao.getOrNull(key);
         if(model == null) {
             model = new Statistics();
@@ -96,7 +96,7 @@ public class StatisticsService {
      */
     public static Statistics getProjectStatus(ProjectStatus status) {
         
-        Key key = createKey("project_" + status.toString());
+        Key key = createKey("project_contact_" + status.toString());
         Statistics model = dao.getOrNull(key);
         if(model == null) {
             model = new Statistics();

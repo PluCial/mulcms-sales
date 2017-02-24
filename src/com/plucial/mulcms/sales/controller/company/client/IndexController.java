@@ -18,17 +18,14 @@ public class IndexController extends BaseController {
         
         // ステータス
         String statusString = asString("status");
-        S3QueryResultList<? extends Company> companyList = null;
+        ContactStatus status = ContactStatus.pending_delivery;
         
-        if(StringUtil.isEmpty(statusString)) {
-            companyList = ClientService.getList(App.LIST_NUMBER_OF_ITEMS, StringUtil.isEmpty(cursor) ? null : cursor);
-                
-        }else {
-            ContactStatus status = ContactStatus.valueOf(statusString);
-            requestScope("status", status);
-            
-            companyList = ClientService.getList(status, App.LIST_NUMBER_OF_ITEMS, StringUtil.isEmpty(cursor) ? null : cursor);
+        if(!StringUtil.isEmpty(statusString)) {
+            status = ContactStatus.valueOf(statusString);       
         }
+        
+        requestScope("status", status);
+        S3QueryResultList<? extends Company> companyList = ClientService.getList(status, App.LIST_NUMBER_OF_ITEMS, StringUtil.isEmpty(cursor) ? null : cursor);
         
         requestScope("companyList", companyList);
         requestScope("nextCursor", companyList.getEncodedCursor());

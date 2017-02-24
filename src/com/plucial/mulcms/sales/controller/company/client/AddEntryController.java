@@ -27,7 +27,7 @@ public class AddEntryController extends BaseController {
         ClientService.put(clientIndustry, name, email, address, homepage, phoneNumber, responsiblePartyName);
         
         
-        return redirect("/company/client/add");
+        return redirect("/company/client/");
     }
     
     /**
