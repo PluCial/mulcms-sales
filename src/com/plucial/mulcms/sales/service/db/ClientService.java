@@ -50,15 +50,15 @@ public class ClientService extends CompanyService {
 
 
                 model.setKey(createKey());
-                model.setDomain(companyDomain);
+                model.setDomain(StringUtil.isEmpty(companyDomain) ? null : companyDomain);
                 model.setIndustry(clientIndustry);
-                model.setName(name.trim());
-                model.setHomepage(homepage.trim());
-                model.setAddress(address.trim());
+                model.setName(StringUtil.isEmpty(name) ? null : name.trim());
+                model.setHomepage(StringUtil.isEmpty(homepage) ? null : homepage.trim());
+                model.setAddress(StringUtil.isEmpty(address) ? null : address.trim());
                 
-                model.setEmail(StringUtil.isEmpty(email.trim()) ? null : new Email(email.trim()));
-                model.setPhoneNumber(StringUtil.isEmpty(phoneNumber.trim()) ? null : new PhoneNumber(phoneNumber.trim()));
-                model.setResponsiblePartyName(StringUtil.isEmpty(responsiblePartyName.trim()) ? null : responsiblePartyName.trim());
+                model.setEmail(StringUtil.isEmpty(email) ? null : new Email(email.trim()));
+                model.setPhoneNumber(StringUtil.isEmpty(phoneNumber) ? null : new PhoneNumber(phoneNumber.trim()));
+                model.setResponsiblePartyName(StringUtil.isEmpty(responsiblePartyName) ? null : responsiblePartyName.trim());
 
                 Datastore.put(tx, model);
 

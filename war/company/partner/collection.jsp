@@ -41,18 +41,24 @@ Errors errors =(Errors) request.getAttribute("errors");
 						<div class="box box-primary">
 						
 							<!-- form start -->
-							<form action="/company/partner/collectionEntry" method="post">
+							
 								<div class="box-body">
-										<div class="form-group">
-											<label>取り込み先URL</label>
-											<input ${f:text("url")} class="form-control" id="exampleInputEmail1" placeholder="https:///xxxx.com/xxx.html">
-										</div>
+									<form action="/company/partner/collectionEntry" method="post">
+										<div class="input-group">
+						                    <input ${f:text("url")} class="form-control" placeholder="https:///xxxx.com/xxx.html">
+						                    <span class="input-group-btn">
+						                      <button class="btn btn-primary btn-flat" type="submit">個別取り込み</button>
+						                    </span>
+					                    </div>
+				                    </form>
 								</div><!-- /.box-body -->
 
-								<div class="box-footer">
-									<button type="submit" class="btn btn-primary pull-right">取り込み</button>
+								<div class="box-footer text-center">
+									<p class="text-red text-left">バッチを使ってまとめて追加する場合は、複数のスレッドから同じStatistics エンティティに対してGET、PUTを行うため、ConcurrentModificationException が発生する。それを回避するために、このバッチでは 「会社総数」と「未配信数」の加算を行っていない。<br /><br />バッチ実行後にGCPの管理画面から手動でStatistics のカウンターを修正する必要がある。</p>
+									<p class="">それでも実行したい？<br />good luck.<br /></p>
+									<a href="/queue/partnerCollectionQueue" class="btn btn-primary">収集バッチの実行</a>
 								</div>
-							</form>
+							
 						</div><!-- /.box -->
 					</div><!-- /.col -->
           

@@ -22,7 +22,7 @@ public class AddEntryController extends BaseController {
         String phoneNumber = asString("phoneNumber");
         String responsiblePartyName = asString("responsiblePartyName");
         
-        PartnerService.put(name, homepage, address, email, phoneNumber, responsiblePartyName);
+        PartnerService.put(name, homepage, address, email, phoneNumber, responsiblePartyName, false);
         
         
         return redirect("/company/partner/");

@@ -18,11 +18,9 @@ import com.plucial.mulcms.sales.model.Company;
 public class EMailService {
     
     /**
-     * 登録メール
-     * @param localeProp
-     * @param recipientAddress
-     * @param registerUrl
+     * パートナー コンタクトメール
      * @param environment
+     * @param company
      * @throws UnsupportedEncodingException
      * @throws MessagingException
      */
@@ -51,7 +49,7 @@ public class EMailService {
         message.append("\n");
         message.append("\n\n");
         
-        send(environment, company.getEmail().getEmail(), App.PARTNAR_EMAIL_FROM_ADDRESS, subject, message.toString());
+        send(environment, company.getEmail().getEmail(), company.getName() + "様", App.PARTNAR_EMAIL_FROM_ADDRESS, App.PARTNER_MAIL_FROM_PERSONAL, subject, message.toString());
         
     }
     
@@ -89,23 +87,28 @@ public class EMailService {
         message.append("\n");
         message.append("\n\n");
         
-        send(environment, company.getEmail().getEmail(), App.PARTNAR_EMAIL_FROM_ADDRESS, subject, message.toString());
+        send(environment, company.getEmail().getEmail(), company.getName()+ "様", App.CLIENT_EMAIL_FROM_ADDRESS, App.CLIENT_MAIL_FROM_PERSONAL, subject, message.toString());
         
     }
     
     /**
      * メール送信
-     * @param recipientAddress
+     * @param environment
+     * @param sendAddress
+     * @param sendPersonal
+     * @param fromAddress
+     * @param fromPersonal
      * @param subject
      * @param message
-     * @param environment
      * @throws UnsupportedEncodingException
      * @throws MessagingException
      */
     private static void send(
             Environment environment,
-            String recipientAddress, 
+            String sendAddress,
+            String sendPersonal,
             String fromAddress,
+            String fromPersonal,
             String subject, 
             String message) throws UnsupportedEncodingException, MessagingException {
         
@@ -120,11 +123,11 @@ public class EMailService {
         MimeMessage msg = new MimeMessage(session);
 
         //発信元情報：メールアドレス、名前
-        msg.setFrom(new InternetAddress(fromAddress, App.CLIENT_EMAIL_FROM_ADDRESS, "ISO-2022-JP"));
+        msg.setFrom(new InternetAddress(fromAddress, fromPersonal, "ISO-2022-JP"));
 
         //送信先情報
         msg.addRecipient(Message.RecipientType.TO,
-            new InternetAddress(recipientAddress));
+            new InternetAddress(sendAddress, sendPersonal, "ISO-2022-JP"));
 
         msg.setSubject(subject, "ISO-2022-JP");
         msg.setText(message);

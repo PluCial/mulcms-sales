@@ -33,6 +33,14 @@ public class PartnerService extends CompanyService {
     
     /**
      * PUT
+     * <pre>
+     * タスクでまとめて追加する場合は、複数のスレッドから同じStatistics エンティティに対してGET、PUTを
+     * 行うため、ConcurrentModificationException が発生する.
+     * そのために、このメソッドでは 「会社総数の加算」と「未配信数の加算」を行わない。
+     * 
+     * GCPの管理画面から手動でStatistics のカウンターを修正する。
+     * カウンター数は GCPのインデックスから確認できる。
+     * </pre>
      * @param name
      * @param homepage
      * @param address
@@ -42,7 +50,7 @@ public class PartnerService extends CompanyService {
      * @return
      * @throws MalformedURLException 
      */
-    public static Partner put(String name, String homepage, String address, String email, String phoneNumber, String responsiblePartyName) throws MalformedURLException  {
+    public static Partner put(String name, String homepage, String address, String email, String phoneNumber, String responsiblePartyName, boolean isFromTask) throws MalformedURLException  {
         Partner model = null;
         String companyDomain = getCompanyDomainByHomePage(homepage);
         
@@ -59,27 +67,29 @@ public class PartnerService extends CompanyService {
 
 
                 model.setKey(createKey());
-                model.setDomain(companyDomain);
-                model.setName(name.trim());
-                model.setHomepage(homepage.trim());
-                model.setAddress(address.trim());
+                model.setDomain(StringUtil.isEmpty(companyDomain) ? null : companyDomain);
+                model.setName(StringUtil.isEmpty(name) ? null : name.trim());
+                model.setHomepage(StringUtil.isEmpty(homepage) ? null : homepage.trim());
+                model.setAddress(StringUtil.isEmpty(address) ? null : address.trim());
                 
-                model.setEmail(StringUtil.isEmpty(email.trim()) ? null : new Email(email.trim()));
-                model.setPhoneNumber(StringUtil.isEmpty(phoneNumber.trim()) ? null : new PhoneNumber(phoneNumber.trim()));
-                model.setResponsiblePartyName(StringUtil.isEmpty(responsiblePartyName.trim()) ? null : responsiblePartyName.trim());
+                model.setEmail(StringUtil.isEmpty(email) ? null : new Email(email.trim()));
+                model.setPhoneNumber(StringUtil.isEmpty(phoneNumber) ? null : new PhoneNumber(phoneNumber.trim()));
+                model.setResponsiblePartyName(StringUtil.isEmpty(responsiblePartyName) ? null : responsiblePartyName.trim());
 
                 Datastore.put(tx, model);
 
-                // 会社総数の加算
-                Statistics statistics = StatisticsService.getNumber(StatisticsService.PARTNER_TOTAL_NUMBER_KEY);
-                statistics.setStatistic(statistics.getStatistic() + 1);
-                StatisticsService.put(tx, statistics);
-                
-                // 未配信数の加算
-                Statistics pendingDeliveryStatistics = StatisticsService.getPartnerStatus(ContactStatus.pending_delivery);
-                pendingDeliveryStatistics.setStatistic(pendingDeliveryStatistics.getStatistic() + 1);
-                StatisticsService.put(tx, pendingDeliveryStatistics);
-                
+                // Taskからではない場合、カウントを更新
+                if(!isFromTask) {
+                    // 会社総数の加算
+                    Statistics statistics = StatisticsService.getNumber(StatisticsService.PARTNER_TOTAL_NUMBER_KEY);
+                    statistics.setStatistic(statistics.getStatistic() + 1);
+                    StatisticsService.put(tx, statistics);
+
+                    // 未配信数の加算
+                    Statistics pendingDeliveryStatistics = StatisticsService.getPartnerStatus(ContactStatus.pending_delivery);
+                    pendingDeliveryStatistics.setStatistic(pendingDeliveryStatistics.getStatistic() + 1);
+                    StatisticsService.put(tx, pendingDeliveryStatistics);
+                }
                 
                 // 検索対象にする
                 PartnerSearchService.put(model);
@@ -98,14 +108,22 @@ public class PartnerService extends CompanyService {
     
     /**
      * PUT
+     * <pre>
+     * タスクでまとめて追加する場合は、複数のスレッドから同じStatistics エンティティに対してGET、PUTを
+     * 行うため、ConcurrentModificationException が発生する.
+     * そのために、このメソッドでは 「会社総数の加算」と「未配信数の加算」を行わない。
+     * 
+     * GCPの管理画面から手動でStatistics のカウンターを修正する。
+     * カウンター数は GCPのインデックスから確認できる。
+     * </pre>
      * @param name
      * @param homepage
      * @param address
      * @return
      * @throws MalformedURLException 
      */
-    public static Partner put(String name, String homepage, String address) throws MalformedURLException {
-        return put(name, homepage, address, null, null, null);
+    public static Partner put(String name, String homepage, String address, boolean isFromTask) throws MalformedURLException {
+        return put(name, homepage, address, null, null, null, isFromTask);
     }
     
     /**

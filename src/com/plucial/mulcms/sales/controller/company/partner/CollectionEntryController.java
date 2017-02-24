@@ -16,7 +16,7 @@ public class CollectionEntryController extends BaseController {
         }
         
         String url = asString("url");
-        PartnerCollectService.Build(url);
+        PartnerCollectService.Build(url, false);
         
         return redirect("/company/partner/collection");
     }

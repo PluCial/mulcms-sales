@@ -1,50 +1,20 @@
-<!-- Indices written at Fri, 24 Feb 2017 15:34:04 JST -->
+<!-- Indices written at Sat, 25 Feb 2017 01:33:50 JST -->
 
 <datastore-indexes>
 
-    <!-- Used 7 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
         <property name="contactStatus" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
+        <property name="numberOfProjects" direction="desc"/>
         <property name="createDate" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 2 times in query history -->
-    <datastore-index kind="Project" ancestor="false" source="auto">
-        <property name="clientRef" direction="asc"/>
-        <property name="createDate" direction="desc"/>
-    </datastore-index>
-
-    <!-- Used 2 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
         <property name="partner" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
         <property name="numberOfProjects" direction="desc"/>
-        <property name="createDate" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Company" ancestor="false" source="auto">
-        <property name="locationCode" direction="asc"/>
-        <property name="partner" direction="asc"/>
-        <property name="slim3.classHierarchyList" direction="asc"/>
-        <property name="numberOfProjects" direction="desc"/>
-        <property name="createDate" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Company" ancestor="false" source="auto">
-        <property name="contactStatus" direction="asc"/>
-        <property name="slim3.classHierarchyList" direction="asc"/>
-        <property name="numberOfProjects" direction="desc"/>
-        <property name="createDate" direction="asc"/>
-    </datastore-index>
-
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Company" ancestor="false" source="auto">
-        <property name="contactStatus" direction="asc"/>
-        <property name="industry" direction="asc"/>
-        <property name="slim3.classHierarchyList" direction="asc"/>
         <property name="createDate" direction="asc"/>
     </datastore-index>
 

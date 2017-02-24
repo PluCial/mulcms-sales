@@ -25,7 +25,7 @@ public class PartnerCollectService {
      * メインメソッド
      * @throws IOException 
      */
-    public static void Build(String urlStr) throws IOException {
+    public static void Build(String urlStr, boolean isFromTask) throws IOException {
         
         Document companyListDocument = getDocument(urlStr);
         Elements serviceItemElems = companyListDocument.select("#services-contents .item.recommend");
@@ -33,31 +33,32 @@ public class PartnerCollectService {
         for (Element serviceItemElem : serviceItemElems) {
             
             try {
-            // 会社名
-            Element companyNameElem = serviceItemElem.select(".item-header .name .primary a").get(0);
-            String companyName = companyNameElem.text().trim();
-            
-            
-            // ホームページリンク
-            Element homePageUrlElem = serviceItemElem.select(".item-body a.view_homepage").get(0);
-            String homePageUrl = homePageUrlElem.attr("href").trim();
-            
-            // サービスURL
-            Element serviceUrl = serviceItemElem.select(".item-header .name .secondary a").get(0);
-            String companyServicePageUrl = "https://imitsu.jp" +  serviceUrl.attr("href").trim();
-            System.out.println(companyServicePageUrl);
-            
-            // サービスページ取得
-            Document companyServiceDocument = getDocument(companyServicePageUrl);
-            
-            
-            // 住所の取得
-            Elements addressElems = companyServiceDocument.select("[name=company_address]");
-            String address = addressElems.get(0).attr("value").trim();
-            
-            PartnerService.put(companyName, homePageUrl, address);
+                // 会社名
+                Element companyNameElem = serviceItemElem.select(".item-header .name .primary a").get(0);
+                String companyName = companyNameElem.text().trim();
+
+
+                // ホームページリンク
+                Element homePageUrlElem = serviceItemElem.select(".item-body a.view_homepage").get(0);
+                String homePageUrl = homePageUrlElem.attr("href").trim();
+
+                // サービスURL
+                Element serviceUrl = serviceItemElem.select(".item-header .name .secondary a").get(0);
+                String companyServicePageUrl = "https://imitsu.jp" +  serviceUrl.attr("href").trim();
+                System.out.println(companyServicePageUrl);
+
+                // サービスページ取得
+                Document companyServiceDocument = getDocument(companyServicePageUrl);
+
+
+                // 住所の取得
+                Elements addressElems = companyServiceDocument.select("[name=company_address]");
+                String address = addressElems.get(0).attr("value").trim();
+
+                PartnerService.put(companyName, homePageUrl, address, isFromTask);
             }catch(Exception e) {
                 // エラーの場合は取り込まない
+                e.printStackTrace();
             }
             
         }
