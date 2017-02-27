@@ -5,6 +5,7 @@ import org.slim3.controller.Navigation;
 import com.plucial.mulcms.sales.controller.AppBaseController;
 import com.plucial.mulcms.sales.enums.ContactStatus;
 import com.plucial.mulcms.sales.enums.Environment;
+import com.plucial.mulcms.sales.enums.MailKey;
 import com.plucial.mulcms.sales.model.Client;
 import com.plucial.mulcms.sales.model.Company;
 import com.plucial.mulcms.sales.model.Partner;
@@ -18,12 +19,16 @@ public class ContactMailSendEntryController extends AppBaseController {
         
         Company company = CompanyService.get(asString("company"));
         
-        InfoMailService.sendInfoMail(environment, company, false);
+        
         
         if(company instanceof Partner) {
+            InfoMailService.sendInfoMail(environment, company, MailKey.partner_contact_mail, false);
+            
             return redirect("/company/partner/?status=" + ContactStatus.pending_delivery);
             
         }else if(company instanceof Client) {
+            InfoMailService.sendInfoMail(environment, company, MailKey.client_contact_mail, false);
+            
             return redirect("/company/client/?status=" + ContactStatus.pending_delivery);
             
         }else {

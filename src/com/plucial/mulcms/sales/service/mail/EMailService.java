@@ -39,7 +39,12 @@ public class EMailService {
             String message) throws UnsupportedEncodingException, MessagingException {
         
         if(environment == Environment.Local) {
-            System.out.println(subject);
+            System.out.println("sendAddress:" + sendAddress);
+            System.out.println("sendPersonal:" + sendPersonal);
+            System.out.println("fromAddress:" + fromAddress);
+            System.out.println("fromPersonal:" + fromPersonal);
+            System.out.println("subject:" + subject);
+            System.out.println("message:");
             System.out.println(message.toString());
             return;
         }

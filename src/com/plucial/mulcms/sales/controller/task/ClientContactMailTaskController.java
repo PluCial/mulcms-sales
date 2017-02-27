@@ -5,6 +5,7 @@ import org.slim3.controller.validator.Validators;
 
 import com.plucial.mulcms.sales.controller.AppBaseController;
 import com.plucial.mulcms.sales.enums.Environment;
+import com.plucial.mulcms.sales.enums.MailKey;
 import com.plucial.mulcms.sales.model.Client;
 import com.plucial.mulcms.sales.service.db.ClientService;
 import com.plucial.mulcms.sales.service.mail.InfoMailService;
@@ -23,7 +24,7 @@ public class ClientContactMailTaskController extends AppBaseController {
         try {
             Client company = (Client)ClientService.get(asString("company"));
             
-            InfoMailService.sendInfoMail(environment, company, true);
+            InfoMailService.sendInfoMail(environment, company, MailKey.client_contact_mail, true);
 
         }catch(Exception e) {
             e.printStackTrace();

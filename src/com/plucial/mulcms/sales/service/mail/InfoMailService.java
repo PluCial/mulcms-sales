@@ -9,90 +9,18 @@ import org.slim3.util.StringUtil;
 
 import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Transaction;
-import com.plucial.mulcms.sales.App;
 import com.plucial.mulcms.sales.enums.ContactStatus;
 import com.plucial.mulcms.sales.enums.Environment;
+import com.plucial.mulcms.sales.enums.MailKey;
 import com.plucial.mulcms.sales.model.Client;
 import com.plucial.mulcms.sales.model.Company;
+import com.plucial.mulcms.sales.model.MailTemplate;
 import com.plucial.mulcms.sales.model.Partner;
 import com.plucial.mulcms.sales.model.Statistics;
+import com.plucial.mulcms.sales.service.db.MailTemplateService;
 import com.plucial.mulcms.sales.service.db.StatisticsService;
 
 public class InfoMailService extends EMailService {
-    
-    /**
-     * パートナー コンタクトメール
-     * @param environment
-     * @param company
-     * @throws UnsupportedEncodingException
-     * @throws MessagingException
-     */
-    public static void partnerCotactMail(
-            Environment environment,
-            Company company) throws UnsupportedEncodingException, MessagingException {
-        
-        // タイトル
-        String subject = "初めまして";
-        
-        // メッセージ
-        StringBuilder message = new StringBuilder();
-        message.append("パートナー Infoメール");
-        message.append("\n\n");
-        message.append("以下の内容でお申し込みを承りました。");
-        message.append("\n");
-        message.append("◆ お申し込み内容");
-        message.append("\n");
-        message.append("-------------------------------------------------");
-        message.append("\n");
-        message.append("-------------------------------------------------");
-        message.append("\n\n\n");
-        message.append("◆ ご利用開始方法");
-        message.append("\n");
-        message.append("下記URLをクリックし登録を完了してください。");
-        message.append("\n");
-        message.append("\n\n");
-        
-        send(environment, company.getEmail().getEmail(), company.getName() + "様", App.PARTNAR_EMAIL_FROM_ADDRESS, App.PARTNER_MAIL_FROM_PERSONAL, subject, message.toString());
-        
-    }
-    
-    /**
-     * クライアントコンタクトメール
-     * @param localeProp
-     * @param recipientAddress
-     * @param registerUrl
-     * @param environment
-     * @throws UnsupportedEncodingException
-     * @throws MessagingException
-     */
-    public static void clientCotactMail(
-            Environment environment,
-            Company company) throws UnsupportedEncodingException, MessagingException {
-        
-        // タイトル
-        String subject = "初めまして";
-        
-        // メッセージ
-        StringBuilder message = new StringBuilder();
-        message.append("クライアント Infoメール");
-        message.append("\n\n");
-        message.append("以下の内容でお申し込みを承りました。");
-        message.append("\n");
-        message.append("◆ お申し込み内容");
-        message.append("\n");
-        message.append("-------------------------------------------------");
-        message.append("\n");
-        message.append("-------------------------------------------------");
-        message.append("\n\n\n");
-        message.append("◆ ご利用開始方法");
-        message.append("\n");
-        message.append("下記URLをクリックし登録を完了してください。");
-        message.append("\n");
-        message.append("\n\n");
-        
-        send(environment, company.getEmail().getEmail(), company.getName()+ "様", App.CLIENT_EMAIL_FROM_ADDRESS, App.CLIENT_MAIL_FROM_PERSONAL, subject, message.toString());
-        
-    }
     
     /**
      * info メール送信成功
@@ -192,30 +120,32 @@ public class InfoMailService extends EMailService {
      * @param model
      * @throws UnsupportedEncodingException 
      */
-    public static void sendInfoMail(Environment environment, Company model, boolean isFromTask) throws UnsupportedEncodingException {
+    public static void sendInfoMail(Environment environment, Company model, MailKey mailKey, boolean isFromTask) throws UnsupportedEncodingException {
         
         if(model.getEmail() == null || StringUtil.isEmpty(model.getEmail().getEmail())) {
             model.setEmail(new Email("info@" + model.getDomain()));
         }
         
+        MailTemplate template = MailTemplateService.get(mailKey);
+        String sendPersonal = model.getName() + " " + (StringUtil.isEmpty(model.getResponsiblePartyName()) ? "ご担当者" : model.getResponsiblePartyName()) + "様";
+        
         try {
-            if(model instanceof Partner) {
-                partnerCotactMail(environment, model);
-                
-            }else if(model instanceof Client) {
-                clientCotactMail(environment, model);
-                
-            }else {
-                return;
-            }
+            send(
+                environment, 
+                model.getEmail().getEmail(), 
+                model.getName(),
+                mailKey.getFromAddress(), 
+                template.getFromPersonal(), 
+                template.getSubject(), 
+                sendPersonal + "\n\n" + template.getMessageString());
             
-//            throw new MessagingException();  //ローカルでの失敗テスト用
             infoMailSuccess(model, isFromTask);
             
         } catch (MessagingException e) {
             model.setEmail(null);
             infoMailFailure(model, isFromTask);
         }
+
     }
 
 }

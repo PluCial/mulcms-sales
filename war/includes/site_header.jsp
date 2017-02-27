@@ -39,6 +39,8 @@
 	                  <ul class="dropdown-menu" role="menu">
 	                  	<li><a href="/company/partner/add">パートナー登録</a></li>
 	                  	<li><a href="/company/client/add">クライアント登録</a></li>
+	                  	<li class="divider"></li>
+	                    <li><a href="/mail/">メールテンプレート</a></li>
 	                    <li class="divider"></li>
 	                    <li><a href="/task/">タスク管理</a></li>
 	                    <!-- <li class="divider"></li>
