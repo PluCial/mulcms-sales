@@ -3,8 +3,13 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
 <%@ page import="org.slim3.controller.validator.Errors" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.plucial.mulcms.sales.model.*" %>
+<%@ page import="com.plucial.mulcms.sales.enums.*" %>
+<%@ page import="org.slim3.util.StringUtil" %>
 <%
 Errors errors =(Errors) request.getAttribute("errors");
+Task task = (Task) request.getAttribute("task");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,15 +24,23 @@ Errors errors =(Errors) request.getAttribute("errors");
       
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            <i class="fa fa-tasks"></i> タスク管理
+          </h1>
+        </section>
 
-        	<!-- Main content -->
-			<section class="content">
-				<div class="row">
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- partner left content -->
+            <jsp:include page="/includes/task_left_content.jsp" />
+            <!-- partner left content -->
             
-					<div class="col-md-4 col-md-offset-4">
-						<h2 class="page-header"><i class="fa fa-building-o"></i> デザイン会社の取り込み</h2>
-						
+            <div class="col-md-4 col-md-offset-2">
+				
 						<%if (!errors.isEmpty()){ %>
 						<!-- alert -->
 						<div class="alert alert-warning alert-dismissable">
@@ -40,32 +53,26 @@ Errors errors =(Errors) request.getAttribute("errors");
                   
 						<div class="box box-primary">
 						
-							<!-- form start -->
+							<div class="box-header">
+			                  <h3 class="box-title"><%=Task.partner_contact_mail.getName() %></h3>
+			                </div>
 							
 								<div class="box-body">
-									<form action="/company/partner/collectionEntry" method="post">
+									<form action="/task/partnerContactMailQueue" method="post">
 										<div class="input-group">
-						                    <input ${f:text("url")} class="form-control" placeholder="https:///xxxx.com/xxx.html">
+						                    <input type="number" name="count" class="form-control" placeholder="実行数" value="50" />
 						                    <span class="input-group-btn">
-						                      <button class="btn btn-primary btn-flat" type="submit">個別取り込み</button>
+						                      <button class="btn btn-primary btn-flat" type="submit">実行</button>
 						                    </span>
 					                    </div>
 				                    </form>
 								</div><!-- /.box-body -->
-
-								<div class="box-footer text-center">
-									<p class="text-red text-left">バッチを使ってまとめて追加する場合は、複数のスレッドから同じStatistics エンティティに対してGET、PUTを行うため、ConcurrentModificationException が発生する。それを回避するために、このバッチでは 「会社総数」と「未配信数」の加算を行っていない。<br /><br />バッチ実行後にGCPの管理画面から手動でStatistics のカウンターを修正する必要がある。</p>
-									<p class="">それでも実行したい？<br />good luck.<br /></p>
-									<a href="/queue/partnerCollectionQueue" class="btn btn-primary">収集バッチの実行</a>
-								</div>
 							
 						</div><!-- /.box -->
 					</div><!-- /.col -->
-          
-				</div><!-- /.row -->
-			</section><!-- /.content -->
-        <!-- /.content -->
-		</div><!-- /.content-wrapper -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
 	
 		<!-- page footer -->
     	<jsp:include page="/includes/site_footer.jsp" />

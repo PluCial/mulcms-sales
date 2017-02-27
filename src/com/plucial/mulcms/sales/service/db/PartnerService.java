@@ -86,7 +86,7 @@ public class PartnerService extends CompanyService {
                     StatisticsService.put(tx, statistics);
 
                     // 未配信数の加算
-                    Statistics pendingDeliveryStatistics = StatisticsService.getPartnerStatus(ContactStatus.pending_delivery);
+                    Statistics pendingDeliveryStatistics = StatisticsService.getPartnerByStatus(ContactStatus.pending_delivery);
                     pendingDeliveryStatistics.setStatistic(pendingDeliveryStatistics.getStatistic() + 1);
                     StatisticsService.put(tx, pendingDeliveryStatistics);
                 }

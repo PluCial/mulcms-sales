@@ -68,7 +68,7 @@ public class ClientService extends CompanyService {
                 StatisticsService.put(tx, statistics);
                 
                 // 未配信数の加算
-                Statistics pendingDeliveryStatistics = StatisticsService.getClientStatus(ContactStatus.pending_delivery);
+                Statistics pendingDeliveryStatistics = StatisticsService.getClientByStatus(ContactStatus.pending_delivery);
                 pendingDeliveryStatistics.setStatistic(pendingDeliveryStatistics.getStatistic() + 1);
                 StatisticsService.put(tx, pendingDeliveryStatistics);
                 

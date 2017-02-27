@@ -18,23 +18,23 @@ public abstract class BaseController extends AppBaseController {
         requestScope("projectTotalNumber", projectTotalNumber);
         
         // ステータス(新規)
-        Statistics newProjectStatistics = StatisticsService.getProjectStatus(ProjectStatus.new_project);
+        Statistics newProjectStatistics = StatisticsService.getProjectByStatus(ProjectStatus.new_project);
         requestScope("newProjectStatistics", newProjectStatistics);
         
         // ステータス(進行中)
-        Statistics inProgressStatistics = StatisticsService.getProjectStatus(ProjectStatus.in_progress);
+        Statistics inProgressStatistics = StatisticsService.getProjectByStatus(ProjectStatus.in_progress);
         requestScope("inProgressStatistics", inProgressStatistics);
 
         // ステータス(保留)
-        Statistics onHoldStatistics = StatisticsService.getProjectStatus(ProjectStatus.on_hold);
+        Statistics onHoldStatistics = StatisticsService.getProjectByStatus(ProjectStatus.on_hold);
         requestScope("onHoldStatistics", onHoldStatistics);
 
         // ステータス(受注)
-        Statistics orderedStatistics = StatisticsService.getProjectStatus(ProjectStatus.ordered);
+        Statistics orderedStatistics = StatisticsService.getProjectByStatus(ProjectStatus.ordered);
         requestScope("orderedStatistics", orderedStatistics);
 
         // ステータス(失注)
-        Statistics lossOfOrderStatistics = StatisticsService.getProjectStatus(ProjectStatus.loss_of_order);
+        Statistics lossOfOrderStatistics = StatisticsService.getProjectByStatus(ProjectStatus.loss_of_order);
         requestScope("lossOfOrderStatistics", lossOfOrderStatistics);
         
         return exe(environment);

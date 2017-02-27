@@ -13,4 +13,14 @@
     <rate>10/s</rate>
     <bucket-size>10</bucket-size>
   </queue>
+  <queue>
+    <name>client-contact-mail</name>
+    <rate>10/s</rate>
+    <bucket-size>10</bucket-size>
+  </queue>
+  <queue>
+    <name>partner-contact-mail</name>
+    <rate>10/s</rate>
+    <bucket-size>10</bucket-size>
+  </queue>
 </queue-entries>

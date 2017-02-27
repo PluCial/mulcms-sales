@@ -18,7 +18,7 @@ public class ContactMailSendEntryController extends AppBaseController {
         
         Company company = CompanyService.get(asString("company"));
         
-        InfoMailService.sendInfoMail(environment, company);
+        InfoMailService.sendInfoMail(environment, company, false);
         
         if(company instanceof Partner) {
             return redirect("/company/partner/?status=" + ContactStatus.pending_delivery);

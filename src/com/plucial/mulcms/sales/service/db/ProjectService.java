@@ -70,7 +70,7 @@ public class ProjectService {
             Datastore.put(tx, projectTotalStatistics);
             
             // ステータス(新規)のプロジェクト総数を加算
-            Statistics newProjectStatistics = StatisticsService.getProjectStatus(ProjectStatus.new_project);
+            Statistics newProjectStatistics = StatisticsService.getProjectByStatus(ProjectStatus.new_project);
             newProjectStatistics.setStatistic(newProjectStatistics.getStatistic() + 1);
             Datastore.put(tx, newProjectStatistics);
             
@@ -103,12 +103,12 @@ public class ProjectService {
             Datastore.put(tx, partner);
             
             // 進行中プロジェクト数の加算
-            Statistics projectInProgressStatistics = StatisticsService.getProjectStatus(ProjectStatus.in_progress);
+            Statistics projectInProgressStatistics = StatisticsService.getProjectByStatus(ProjectStatus.in_progress);
             projectInProgressStatistics.setStatistic(projectInProgressStatistics.getStatistic() + 1);
             Datastore.put(tx, projectInProgressStatistics);
             
             // 元のスタータスの数を減算
-            Statistics projectOldStatusStatistics = StatisticsService.getProjectStatus(model.getStatus());
+            Statistics projectOldStatusStatistics = StatisticsService.getProjectByStatus(model.getStatus());
             projectOldStatusStatistics.setStatistic(projectOldStatusStatistics.getStatistic() - 1);
             Datastore.put(tx, projectOldStatusStatistics);
             
@@ -146,7 +146,7 @@ public class ProjectService {
             }
             
             // 現在のステータースの総数の減算
-            Statistics projectOldStatusStatistics = StatisticsService.getProjectStatus(model.getStatus());
+            Statistics projectOldStatusStatistics = StatisticsService.getProjectByStatus(model.getStatus());
             projectOldStatusStatistics.setStatistic(projectOldStatusStatistics.getStatistic() - 1);
             Datastore.put(tx, projectOldStatusStatistics);
             
@@ -179,9 +179,9 @@ public class ProjectService {
         if(newStatus == ProjectStatus.new_project ||  model.getStatus() == newStatus) return;
         
         // 元の統計Model
-        Statistics oldStatistics = StatisticsService.getProjectStatus(model.getStatus());
+        Statistics oldStatistics = StatisticsService.getProjectByStatus(model.getStatus());
         // 新しい統計Model
-        Statistics newStatistics = StatisticsService.getProjectStatus(newStatus);
+        Statistics newStatistics = StatisticsService.getProjectByStatus(newStatus);
 
         
         Transaction tx = Datastore.beginTransaction();

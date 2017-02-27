@@ -111,5 +111,24 @@ public class PartnerDao extends DaoBase<Partner>{
                 .encodedStartCursor(cursor)
                 .asQueryResultList();
     }
+    
+    /**
+     * カウントの取得
+     * @return
+     */
+    public int countAll() {
+        return Datastore.query(meta).count();
+    }
+    
+    /**
+     * ステータス毎のカウント
+     * @param status
+     * @return
+     */
+    public int countStatus(ContactStatus status) {
+        return Datastore.query(meta)
+                .filter(meta.contactStatus.equal(status)).count();
+    }
+
 
 }

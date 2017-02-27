@@ -64,12 +64,12 @@ public class CompanyService {
         Statistics newStatistics = null;
         
         if(model instanceof Client) {
-            oldStatistics = StatisticsService.getClientStatus(model.getContactStatus());
-            newStatistics = StatisticsService.getClientStatus(newStatus);
+            oldStatistics = StatisticsService.getClientByStatus(model.getContactStatus());
+            newStatistics = StatisticsService.getClientByStatus(newStatus);
         
         }else if(model instanceof Partner) {
-            oldStatistics = StatisticsService.getPartnerStatus(model.getContactStatus());
-            newStatistics = StatisticsService.getPartnerStatus(newStatus);
+            oldStatistics = StatisticsService.getPartnerByStatus(model.getContactStatus());
+            newStatistics = StatisticsService.getPartnerByStatus(newStatus);
             
         }else {
             return;

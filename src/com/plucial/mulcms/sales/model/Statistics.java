@@ -1,11 +1,13 @@
 package com.plucial.mulcms.sales.model;
 
 import java.io.Serializable;
-
-import com.google.appengine.api.datastore.Key;
+import java.util.Date;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.datastore.ModificationDate;
+
+import com.google.appengine.api.datastore.Key;
 
 /**
  * 統計情報
@@ -28,6 +30,12 @@ public class Statistics implements Serializable {
      */
     @Attribute(unindexed = true)
     private int statistic = 0;
+    
+    /**
+     * 更新日時
+     */
+    @Attribute(listener = ModificationDate.class)
+    private Date updateDate;
 
     /**
      * Returns the key.
@@ -103,5 +111,13 @@ public class Statistics implements Serializable {
 
     public void setStatistic(int statistic) {
         this.statistic = statistic;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

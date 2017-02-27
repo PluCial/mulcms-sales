@@ -38,9 +38,11 @@
 	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i> メニュー <span class="caret"></span></a>
 	                  <ul class="dropdown-menu" role="menu">
 	                  	<li><a href="/company/partner/add">パートナー登録</a></li>
-	                  	<li><a href="/company/partner/collection">パートナー収集</a></li>
+	                  	<li><a href="/company/client/add">クライアント登録</a></li>
 	                    <li class="divider"></li>
-	                    <li><a href="/company/client/add">クライアント登録</a></li>
+	                    <li><a href="/task/">タスク管理</a></li>
+	                    <li class="divider"></li>
+	                    <li><a href="/statistics/">集計</a></li>
 	                  </ul>
 	                </li>
 	              </ul>                        

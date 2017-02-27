@@ -1,4 +1,4 @@
-package com.plucial.mulcms.sales.controller.queue;
+package com.plucial.mulcms.sales.controller.task;
 
 import org.slim3.controller.Navigation;
 
@@ -22,7 +22,7 @@ public class PartnerCollectionQueueController extends AppBaseController {
             String urlStr = "https://imitsu.jp/list/hp-design/?pn=";
             int page = i + 1;
             System.out.println("Queue: " + urlStr + page);
-            queue.add(TaskOptions.Builder.withUrl("/queue/partnerCollectionTask").param("url", urlStr + page));
+            queue.add(TaskOptions.Builder.withUrl("/task/partnerCollectionTask").param("url", urlStr + page));
             
         }
         

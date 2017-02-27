@@ -59,16 +59,8 @@ public class StatisticsService {
      * @return
      * @throws ObjectNotExistException 
      */
-    public static Statistics getClientStatus(ContactStatus status) {
-        Key key = createKey("client_contact_" + status.toString());
-        Statistics model = dao.getOrNull(key);
-        if(model == null) {
-            model = new Statistics();
-            model.setKey(key);
-            Datastore.put(model);
-        }
-        
-        return model;
+    public static Statistics getClientByStatus(ContactStatus status) {
+        return getNumber("client_contact_" + status.toString());
     }
     
     /**
@@ -76,17 +68,8 @@ public class StatisticsService {
      * @return
      * @throws ObjectNotExistException 
      */
-    public static Statistics getPartnerStatus(ContactStatus status) {
-        
-        Key key = createKey("partner_contact_" + status.toString());
-        Statistics model = dao.getOrNull(key);
-        if(model == null) {
-            model = new Statistics();
-            model.setKey(key);
-            Datastore.put(model);
-        }
-        
-        return model;
+    public static Statistics getPartnerByStatus(ContactStatus status) {
+        return getNumber("partner_contact_" + status.toString());
     }
     
     /**
@@ -94,17 +77,8 @@ public class StatisticsService {
      * @return
      * @throws ObjectNotExistException 
      */
-    public static Statistics getProjectStatus(ProjectStatus status) {
-        
-        Key key = createKey("project_contact_" + status.toString());
-        Statistics model = dao.getOrNull(key);
-        if(model == null) {
-            model = new Statistics();
-            model.setKey(key);
-            Datastore.put(model);
-        }
-        
-        return model;
+    public static Statistics getProjectByStatus(ProjectStatus status) {
+        return getNumber("project_contact_" + status.toString());
     }
     
     /**

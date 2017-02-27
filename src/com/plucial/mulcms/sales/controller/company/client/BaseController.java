@@ -18,15 +18,15 @@ public abstract class BaseController extends AppBaseController {
         requestScope("companyTotalNumber", companyTotalNumber);
         
         // 配信待ち数
-        Statistics pendingDeliveryStatistics = StatisticsService.getClientStatus(ContactStatus.pending_delivery);
+        Statistics pendingDeliveryStatistics = StatisticsService.getClientByStatus(ContactStatus.pending_delivery);
         requestScope("pendingDeliveryStatistics", pendingDeliveryStatistics);
         
         // 配信済数
-        Statistics deliveredStatistics = StatisticsService.getClientStatus(ContactStatus.delivered);
+        Statistics deliveredStatistics = StatisticsService.getClientByStatus(ContactStatus.delivered);
         requestScope("deliveredStatistics", deliveredStatistics);
         
         // 配信失敗
-        Statistics deliveryFailureStatistics = StatisticsService.getClientStatus(ContactStatus.delivery_failure);
+        Statistics deliveryFailureStatistics = StatisticsService.getClientByStatus(ContactStatus.delivery_failure);
         requestScope("deliveryFailureStatistics", deliveryFailureStatistics);
         
         return exe(environment);

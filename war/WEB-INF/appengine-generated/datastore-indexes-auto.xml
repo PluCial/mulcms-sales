@@ -1,18 +1,18 @@
-<!-- Indices written at Sat, 25 Feb 2017 01:33:50 JST -->
+<!-- Indices written at Mon, 27 Feb 2017 14:36:55 JST -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
-        <property name="contactStatus" direction="asc"/>
+        <property name="partner" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
         <property name="numberOfProjects" direction="desc"/>
         <property name="createDate" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 1 time in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="Company" ancestor="false" source="auto">
-        <property name="partner" direction="asc"/>
+        <property name="contactStatus" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
         <property name="numberOfProjects" direction="desc"/>
         <property name="createDate" direction="asc"/>

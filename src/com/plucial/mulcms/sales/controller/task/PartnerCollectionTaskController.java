@@ -1,4 +1,4 @@
-package com.plucial.mulcms.sales.controller.queue;
+package com.plucial.mulcms.sales.controller.task;
 
 import org.slim3.controller.Navigation;
 
