@@ -9,10 +9,11 @@ package com.plucial.mulcms.sales.enums;
  *
  */
 public enum Task {
+    refresh_statistics("集計のリフレッシュ", "fa-refresh"),
     partner_collection("パートナー収集", "fa-cloud-download"),
     partner_contact_mail("パートナーコンタクトメール", "fa-envelope"),
-    client_contact_mail("クライアントコンタクトメール", "fa-envelope-o"),
-    refresh_statistics("リフレッシュカウンター", "fa-refresh");
+    client_contact_mail("クライアントコンタクトメール", "fa-envelope-o");
+    
     
     /** 名前 */
     private String name;

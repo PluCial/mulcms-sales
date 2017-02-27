@@ -41,8 +41,8 @@
 	                  	<li><a href="/company/client/add">クライアント登録</a></li>
 	                    <li class="divider"></li>
 	                    <li><a href="/task/">タスク管理</a></li>
-	                    <li class="divider"></li>
-	                    <li><a href="/statistics/">集計</a></li>
+	                    <!-- <li class="divider"></li>
+	                    <li><a href="/statistics/">集計</a></li> -->
 	                  </ul>
 	                </li>
 	              </ul>                        

@@ -164,5 +164,22 @@ public class ClientService extends CompanyService {
     public static S3QueryResultList<Client> getList(ClientIndustry clientIndustry, ContactStatus status, int limit, String cursor) {
         return dao.getList(clientIndustry, status, limit, cursor);
     }
+    
+    /**
+     * カウントの取得
+     * @return
+     */
+    public static int countAll() {
+        return dao.countAll();
+    }
+    
+    /**
+     * ステータス毎のカウント
+     * @param status
+     * @return
+     */
+    public static int countStatus(ContactStatus status) {
+        return dao.countStatus(status);
+    }
 
 }

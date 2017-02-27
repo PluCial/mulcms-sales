@@ -13,7 +13,7 @@ public class IndexController extends AppBaseController {
     protected Navigation execute(Environment environment) throws Exception {
         
         if(StringUtil.isEmpty(asString("type"))) {
-            return redirect("/task/?type=" + Task.partner_collection.toString());
+            return redirect("/task/?type=" + Task.refresh_statistics.toString());
         }
         
         Task task = Task.valueOf(asString("type"));

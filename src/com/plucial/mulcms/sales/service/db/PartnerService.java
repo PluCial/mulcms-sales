@@ -230,5 +230,22 @@ public class PartnerService extends CompanyService {
     public static S3QueryResultList<Partner> searchPartnerByLocationCode(LocationCode locationCode, int limit, String cursor) {
         return dao.searchPartnerByLocationCode(locationCode, limit, cursor);
     }
+    
+    /**
+     * カウントの取得
+     * @return
+     */
+    public static int countAll() {
+        return dao.countAll();
+    }
+    
+    /**
+     * ステータス毎のカウント
+     * @param status
+     * @return
+     */
+    public static int countStatus(ContactStatus status) {
+        return dao.countStatus(status);
+    }
 
 }

@@ -1,4 +1,4 @@
-<!-- Indices written at Mon, 27 Feb 2017 14:36:55 JST -->
+<!-- Indices written at Mon, 27 Feb 2017 16:16:47 JST -->
 
 <datastore-indexes>
 
@@ -14,7 +14,6 @@
     <datastore-index kind="Company" ancestor="false" source="auto">
         <property name="contactStatus" direction="asc"/>
         <property name="slim3.classHierarchyList" direction="asc"/>
-        <property name="numberOfProjects" direction="desc"/>
         <property name="createDate" direction="asc"/>
     </datastore-index>
 
