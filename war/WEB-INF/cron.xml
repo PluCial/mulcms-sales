@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cronentries>
   <cron>
+    <url>/task/statisticsRefreshQueue</url>
+    <description>Statistics Refres</description>
+    <schedule>every mon,tue,wed,thu,fri 09:30</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+  <cron>
     <url>/task/partnerContactMailQueue?count=100</url>
     <description>Partner Contact</description>
     <schedule>every mon,tue,wed,thu,fri 09:00</schedule>
